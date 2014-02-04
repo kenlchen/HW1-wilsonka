@@ -12,6 +12,12 @@ library(data.table)
 geo_con <- dbConnect(SQLite(),'GEOmetadb.sqlite')
 ```
 
+Website: http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40223
+
+PMID: 23067362
+
+This outputs the GSE accession number, GPL accession number, the GSE title, Manufacturer (Illumina), and the platform description (GPL description).
+
 ```{r}
 res <- dbGetQuery(geo_con, "SELECT DISTINCT gse.gse, gse.title, gpl.gpl, gpl.manufacturer, gpl.description FROM gse JOIN gse_gpl ON gse.gse=gse_gpl.gse JOIN gpl ON gse_gpl.gpl=gpl.gpl WHERE gse.pubmed_id='23067362'AND gpl.manufacturer like '%Illumina%';")
 res
